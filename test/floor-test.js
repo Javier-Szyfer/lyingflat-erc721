@@ -9,13 +9,45 @@ describe("LayingFlat", function () {
   let buyer3;
   let buyer4;
   let provider;
+  let b4;
+  let b5;
+  let b6;
+  let b7;
+  let b8;
+  let b9;
+  let b10;
+  let b11;
+  let b12;
+  let b13;
+  let b14;
+  let b15;
+  let b16;
 
   beforeEach(async () => {
-    [deployer, seller, buyer, buyer2, buyer3, buyer4] =
-      await ethers.getSigners();
+    [
+      deployer,
+      seller,
+      buyer,
+      buyer2,
+      buyer3,
+      buyer4,
+      b5,
+      b6,
+      b4,
+      b7,
+      b8,
+      b9,
+      b10,
+      b11,
+      b12,
+      b13,
+      b14,
+      b15,
+      b16,
+    ] = await ethers.getSigners();
     const LF = await ethers.getContractFactory("LayingFlat");
     layingFlat = await LF.deploy(
-      "ipfs://bafybeiacjsrxsjqraaa4aheoz2ppj7ndggogzekkdhmi2amt2ybeks6624/"
+      "ipfs://bafybeiddblti7v4kmhda2neoggpr3jaikdz5rbp4xzzqqyjykotkmf45xy/"
     );
     await layingFlat.deployed();
     provider = waffle.provider;
@@ -78,7 +110,7 @@ describe("LayingFlat", function () {
     it("Returns custom URI", async () => {
       const uri = await layingFlat.contractURI();
       expect(uri).to.be.equal(
-        "ipfs://bafybeiacjsrxsjqraaa4aheoz2ppj7ndggogzekkdhmi2amt2ybeks6624/"
+        "ipfs://bafybeiddblti7v4kmhda2neoggpr3jaikdz5rbp4xzzqqyjykotkmf45xy/"
       );
     });
     it("Returns custom URI w tokenID", async () => {
@@ -87,7 +119,7 @@ describe("LayingFlat", function () {
       });
       const tURI = await layingFlat.tokenURI(1);
       expect(tURI).to.be.equal(
-        "ipfs://bafybeiacjsrxsjqraaa4aheoz2ppj7ndggogzekkdhmi2amt2ybeks6624/1.token.json"
+        "ipfs://bafybeiddblti7v4kmhda2neoggpr3jaikdz5rbp4xzzqqyjykotkmf45xy/1.token.json"
       );
     });
     it("Emits MintedAnNFT event", async () => {
@@ -108,20 +140,153 @@ describe("LayingFlat", function () {
     });
 
     // TEST NOT WORKING PROPERLY
-    it("Withdraw FN splits funds in half", async () => {
-      const padd1 = await layingFlat.payoutAddress1();
-      const padd2 = await layingFlat.payoutAddress2();
-      const payoutAddress1 = await layingFlat.balanceOf(padd1);
-      console.log(payoutAddress1);
-      const payoutAddress2 = await layingFlat.balanceOf(padd2);
-      console.log(payoutAddress2);
+    it("mint only 20 total", async () => {
+      await expect(
+        layingFlat
+          .connect(buyer4)
+          .mint(1, { value: ethers.utils.parseEther("0.1") })
+      )
+        .to.emit(layingFlat, "MintedAnNFT")
+        .withArgs(buyer4.address, 1);
 
-      await layingFlat.connect(deployer).withdraw();
-      const payoutAddress1New = await layingFlat.balanceOf(padd1);
-      console.log(payoutAddress1New);
-      const payoutAddress2New = await layingFlat.balanceOf(padd2);
-      console.log(payoutAddress2New);
-      expect(payoutAddress1New).to.be.equal(payoutAddress2New);
+      await expect(
+        layingFlat
+          .connect(b4)
+          .mint(1, { value: ethers.utils.parseEther("0.1") })
+      )
+        .to.emit(layingFlat, "MintedAnNFT")
+        .withArgs(b4.address, 2);
+      await expect(
+        layingFlat
+          .connect(b5)
+          .mint(1, { value: ethers.utils.parseEther("0.1") })
+      )
+        .to.emit(layingFlat, "MintedAnNFT")
+        .withArgs(b5.address, 3);
+      await expect(
+        layingFlat
+          .connect(b6)
+          .mint(1, { value: ethers.utils.parseEther("0.1") })
+      )
+        .to.emit(layingFlat, "MintedAnNFT")
+        .withArgs(b6.address, 4);
+      await expect(
+        layingFlat
+          .connect(b6)
+          .mint(1, { value: ethers.utils.parseEther("0.1") })
+      )
+        .to.emit(layingFlat, "MintedAnNFT")
+        .withArgs(b6.address, 5);
+      await expect(
+        layingFlat
+          .connect(b7)
+          .mint(1, { value: ethers.utils.parseEther("0.1") })
+      )
+        .to.emit(layingFlat, "MintedAnNFT")
+        .withArgs(b7.address, 6);
+      await expect(
+        layingFlat
+          .connect(b7)
+          .mint(1, { value: ethers.utils.parseEther("0.1") })
+      )
+        .to.emit(layingFlat, "MintedAnNFT")
+        .withArgs(b7.address, 7);
+      await expect(
+        layingFlat
+          .connect(b8)
+          .mint(1, { value: ethers.utils.parseEther("0.1") })
+      )
+        .to.emit(layingFlat, "MintedAnNFT")
+        .withArgs(b8.address, 8);
+      await expect(
+        layingFlat
+          .connect(b8)
+          .mint(1, { value: ethers.utils.parseEther("0.1") })
+      )
+        .to.emit(layingFlat, "MintedAnNFT")
+        .withArgs(b8.address, 9);
+      await expect(
+        layingFlat
+          .connect(b9)
+          .mint(1, { value: ethers.utils.parseEther("0.1") })
+      )
+        .to.emit(layingFlat, "MintedAnNFT")
+        .withArgs(b9.address, 10);
+      await expect(
+        layingFlat
+          .connect(b9)
+          .mint(1, { value: ethers.utils.parseEther("0.1") })
+      )
+        .to.emit(layingFlat, "MintedAnNFT")
+        .withArgs(b9.address, 11);
+      await expect(
+        layingFlat
+          .connect(b10)
+          .mint(1, { value: ethers.utils.parseEther("0.1") })
+      )
+        .to.emit(layingFlat, "MintedAnNFT")
+        .withArgs(b10.address, 12);
+      await expect(
+        layingFlat
+          .connect(b10)
+          .mint(1, { value: ethers.utils.parseEther("0.1") })
+      )
+        .to.emit(layingFlat, "MintedAnNFT")
+        .withArgs(b10.address, 13);
+      await expect(
+        layingFlat
+          .connect(b11)
+          .mint(1, { value: ethers.utils.parseEther("0.1") })
+      )
+        .to.emit(layingFlat, "MintedAnNFT")
+        .withArgs(b11.address, 14);
+      await expect(
+        layingFlat
+          .connect(b11)
+          .mint(1, { value: ethers.utils.parseEther("0.1") })
+      )
+        .to.emit(layingFlat, "MintedAnNFT")
+        .withArgs(b11.address, 15);
+      await expect(
+        layingFlat
+          .connect(b12)
+          .mint(1, { value: ethers.utils.parseEther("0.1") })
+      )
+        .to.emit(layingFlat, "MintedAnNFT")
+        .withArgs(b12.address, 16);
+      await expect(
+        layingFlat
+          .connect(b12)
+          .mint(1, { value: ethers.utils.parseEther("0.1") })
+      )
+        .to.emit(layingFlat, "MintedAnNFT")
+        .withArgs(b12.address, 17);
+      await expect(
+        layingFlat
+          .connect(b13)
+          .mint(1, { value: ethers.utils.parseEther("0.1") })
+      )
+        .to.emit(layingFlat, "MintedAnNFT")
+        .withArgs(b13.address, 18);
+      await expect(
+        layingFlat
+          .connect(b13)
+          .mint(1, { value: ethers.utils.parseEther("0.1") })
+      )
+        .to.emit(layingFlat, "MintedAnNFT")
+        .withArgs(b13.address, 19);
+      await expect(
+        layingFlat
+          .connect(b14)
+          .mint(1, { value: ethers.utils.parseEther("0.1") })
+      )
+        .to.emit(layingFlat, "MintedAnNFT")
+        .withArgs(b14.address, 20);
+      await expect(
+        layingFlat
+          .connect(b14)
+          .mint(1, { value: ethers.utils.parseEther("0.1") })
+      ).to.be.revertedWith("Exceeds max supply");
     });
   });
 });

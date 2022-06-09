@@ -14,12 +14,16 @@ module.exports = {
   networks: {
     hardhat: {
       forking: {
-        url: "https://eth-mainnet.alchemyapi.io/v2/oXLp-8YIAT9EluXzHFl_3Zq6Iqq625NT",
+        url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_MAINNET_KEY}`,
       },
     },
     rinkeby: {
-      url: "https://rinkeby.infura.io/v3/32a7640da08d4454aeb52eeecd624162",
+      url: `https://rinkeby.infura.io/v3/${process.env.INFURA_RINKEBY_API}`,
       accounts: [`${process.env.RINKEBY_PRIVATE_KEY}`],
+    },
+    mainnet: {
+      url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_MAINNET_KEY}`,
+      accounts: [`${process.env.MAINNET_PRIVATE_KEY}`],
     },
   },
   etherscan: { apiKey: process.env.ETHERSCAN_KEY },

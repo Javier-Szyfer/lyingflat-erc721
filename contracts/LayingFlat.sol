@@ -42,7 +42,7 @@ contract LayingFlat is ERC721, IERC2981, ReentrancyGuard, Ownable {
             balanceOf(msg.sender) + count <= MINT_LIMIT_PER_WALLET,
             "Minting limit exceeded"
         );
-        require(mintCounter + count - 1 =< MAX_SUPPLY, "Exceeds max supply");
+        require(mintCounter + count - 1 <= MAX_SUPPLY, "Exceeds max supply");
         require(
             msg.value >= PRICE * count,
             "Insufficient payment, 0.1 ETH per item"
@@ -60,7 +60,7 @@ contract LayingFlat is ERC721, IERC2981, ReentrancyGuard, Ownable {
     /** URI HANDLING **/
 
     string private customContractURI =
-        "ipfs://bafybeiacjsrxsjqraaa4aheoz2ppj7ndggogzekkdhmi2amt2ybeks6624/";
+        "ipfs://bafybeiddblti7v4kmhda2neoggpr3jaikdz5rbp4xzzqqyjykotkmf45xy/";
 
     function setContractURI(string memory customContractURI_)
         external
@@ -95,9 +95,9 @@ contract LayingFlat is ERC721, IERC2981, ReentrancyGuard, Ownable {
     /** PAYOUT **/
 
     address private constant payoutAddress1 =
-        0xc528c778F942aed7d2ba72cF39C4bd684F1571b7;
+        0x52aA63A67b15e3C2F201c9422cAC1e81bD6ea847;
     address private constant payoutAddress2 =
-        0x51D53a0f00CEa948667D0d3687EA15102b4a996f;
+        0xc178ED301ADF2B73609B6d527386f21618c323c2;
 
     function withdraw() public nonReentrant onlyOwner {
         uint256 balance = address(this).balance;
