@@ -16,7 +16,7 @@ async function main() {
   // We get the contract to deploy
   const LayingFlat = await hre.ethers.getContractFactory("LayingFlat");
   const floor = await LayingFlat.deploy(
-    "ipfs://bafybeiacjsrxsjqraaa4aheoz2ppj7ndggogzekkdhmi2amt2ybeks6624/"
+    "ipfs://bafybeiddblti7v4kmhda2neoggpr3jaikdz5rbp4xzzqqyjykotkmf45xy/"
   );
 
   await floor.deployed();
